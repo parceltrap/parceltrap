@@ -4,7 +4,8 @@
     "description": "A driver-based parcel tracking library for PHP",
     "license": "MIT",
     "require": {
-        "php": "^8.0"
+        "php": "^8.0",
+        "guzzlehttp/guzzle": "^7.4"
     },
     "require-dev": {
         "pestphp/pest": "^1.21.1",
