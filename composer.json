@@ -1,0 +1,40 @@
+{
+    "name": "owenvoke/parceltrap",
+    "type": "library",
+    "description": "A driver-based parcel tracking library for PHP",
+    "license": "MIT",
+    "require": {
+        "php": "^7.4 || ^8.0"
+    },
+    "require-dev": {
+        "pestphp/pest": "^1.21.1",
+        "phpstan/phpstan": "^1.4.5",
+        "symfony/var-dumper": "^5.4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "OwenVoke\\ParcelTrap\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "OwenVoke\\ParcelTrap\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test:types": "phpstan analyse --ansi --memory-limit=-1",
+        "test:unit": "pest --colors=always",
+        "test": [
+            "@test:types",
+            "@test:unit"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
