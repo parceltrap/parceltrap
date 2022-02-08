@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OwenVoke\ParcelTrap\Drivers;
 
+use DateTimeImmutable;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use OwenVoke\ParcelTrap\Contracts\Driver;
@@ -33,7 +34,8 @@ class DHL implements Driver
             ], $parameters),
         ]);
 
-        $json = json_decode($request->getBody(), true, 512, JSON_THROW_ON_ERROR);
+        /** @var array $json */
+        $json = json_decode($request->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
 
         assert(isset($json['shipments'][0]), 'No shipment could be found with this id');
         assert(count($json['shipments']) === 1, 'One or more shipments exist with this id, please try again with additional filters');
@@ -47,7 +49,7 @@ class DHL implements Driver
             identifier: $json['mailPieces']['mailPieceId'],
             status: $this->mapStatus($json['status']['statusCode']),
             summary: $json['status']['remark'] ?? $json['status']['description'],
-            estimatedDelivery: isset($json['estimatedTimeOfDelivery']) ? new DateTime($json['estimatedTimeOfDelivery']) : null,
+            estimatedDelivery: isset($json['estimatedTimeOfDelivery']) ? new DateTimeImmutable($json['estimatedTimeOfDelivery']) : null,
             events: $json['events'],
             raw: $json,
         );

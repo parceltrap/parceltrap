@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OwenVoke\ParcelTrap\Drivers;
 
-use DateTime;
+use DateTimeImmutable;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use OwenVoke\ParcelTrap\Contracts\Driver;
@@ -34,7 +34,8 @@ class RoyalMail implements Driver
             RequestOptions::QUERY => $parameters,
         ]);
 
-        $json = json_decode($request->getBody(), true, 512, JSON_THROW_ON_ERROR);
+        /** @var array $json */
+        $json = json_decode($request->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
 
         assert(isset($json['mailPieces']), 'No shipment could be found with this id');
         $json = $json['mailPieces'];
@@ -49,7 +50,7 @@ class RoyalMail implements Driver
             identifier: $json['mailPieceId'],
             status: $this->mapStatus($json['summary']['statusCategory']),
             summary: $json['summary']['summaryLine'],
-            estimatedDelivery: new DateTime($json['estimatedDelivery']['date']),
+            estimatedDelivery: new DateTimeImmutable($json['estimatedDelivery']['date']),
             events: $json['events'],
             raw: $json,
         );
