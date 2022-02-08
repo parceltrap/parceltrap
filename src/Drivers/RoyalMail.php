@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace OwenVoke\ParcelTrap\Drivers;
 
 use DateTime;
@@ -7,6 +9,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use OwenVoke\ParcelTrap\Contracts\Driver;
 use OwenVoke\ParcelTrap\DTOs\TrackingDetails;
+use OwenVoke\ParcelTrap\Enums\Status;
 
 class RoyalMail implements Driver
 {
@@ -52,12 +55,12 @@ class RoyalMail implements Driver
         );
     }
 
-    private function mapStatus(string $status): \Status
+    private function mapStatus(string $status): Status
     {
         return match($status) {
-            'IN TRANSIT' => \Status::IN_TRANSIT,
-            'DELIVERED' => \Status::DELIVERED,
-            default => \Status::UNKNOWN,
+            'IN TRANSIT' => Status::IN_TRANSIT,
+            'DELIVERED' => Status::DELIVERED,
+            default => Status::UNKNOWN,
         };
     }
 }

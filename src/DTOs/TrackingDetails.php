@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace OwenVoke\ParcelTrap\DTOs;
 
 use DateTime;
+use OwenVoke\ParcelTrap\Enums\Status;
 
 class TrackingDetails
 {

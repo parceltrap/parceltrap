@@ -1,16 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace OwenVoke\ParcelTrap\Drivers;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use OwenVoke\ParcelTrap\Contracts\Driver;
 use OwenVoke\ParcelTrap\DTOs\TrackingDetails;
-use Status;
+use OwenVoke\ParcelTrap\Enums\Status;
 
 class DHL implements Driver
 {
-
     private Client $client;
 
     public function __construct(string $clientId)
