@@ -22,7 +22,7 @@ class RoyalMail implements Driver
         $this->client = $client ?? GuzzleFactory::make(['base_uri' => self::BASE_URI]);
     }
 
-    public function findTrackingDetails(string $identifier, array $parameters = []): TrackingDetails
+    public function find(string $identifier, array $parameters = []): TrackingDetails
     {
         $request = $this->client->request('GET', "/mailpieces/v2/{$identifier}/events", [
             RequestOptions::HEADERS => $this->getHeaders(),
