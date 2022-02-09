@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace OwenVoke\ParcelTrap\Drivers;
 
 use DateTimeImmutable;
-use GuzzleHttp\Client;
+use GrahamCampbell\GuzzleFactory\GuzzleFactory;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\RequestOptions;
 use OwenVoke\ParcelTrap\Contracts\Driver;
 use OwenVoke\ParcelTrap\DTOs\TrackingDetails;
@@ -13,22 +14,18 @@ use OwenVoke\ParcelTrap\Enums\Status;
 
 class DHL implements Driver
 {
-    private Client $client;
+    public const BASE_URI = 'https://api-eu.dhl.com';
+    private ClientInterface $client;
 
-    public function __construct(string $clientId)
+    public function __construct(private string $clientId, ?ClientInterface $client = null)
     {
-        $this->client = new Client([
-            'base_uri' => 'https://api-eu.dhl.com',
-            RequestOptions::HEADERS => [
-                'DHL-API-Key' => $clientId,
-                'Accept' => 'application/json',
-            ],
-        ]);
+        $this->client = $client ?? GuzzleFactory::make(['base_uri' => self::BASE_URI]);
     }
 
     public function findTrackingDetails(string $identifier, array $parameters = []): TrackingDetails
     {
-        $request = $this->client->get('/track/shipments', [
+        $request = $this->client->request('GET', '/track/shipments', [
+            RequestOptions::HEADERS => $this->getHeaders(),
             RequestOptions::QUERY => array_merge([
                 'trackingNumber' => $identifier,
             ], $parameters),
@@ -38,7 +35,10 @@ class DHL implements Driver
         $json = json_decode($request->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
 
         assert(isset($json['shipments'][0]), 'No shipment could be found with this id');
-        assert(count($json['shipments']) === 1, 'One or more shipments exist with this id, please try again with additional filters');
+        assert(
+            count($json['shipments']) === 1,
+            'One or more shipments exist with this id, please try again with additional filters'
+        );
 
         $json = $json['shipments'][0];
         assert(isset($json['status']['statusCode']), 'The status is missing from the response');
@@ -57,12 +57,24 @@ class DHL implements Driver
 
     private function mapStatus(string $status): Status
     {
-        return match($status) {
+        return match ($status) {
             'pre-transit' => Status::PRE_TRANSIT,
             'transit' => Status::IN_TRANSIT,
             'delivered' => Status::DELIVERED,
             'failure' => Status::FAILURE,
             default => Status::UNKNOWN,
         };
+    }
+
+    /**
+     * @param  array<string, mixed>  $headers
+     * @return array<string, mixed>
+     */
+    private function getHeaders(array $headers = []): array
+    {
+        return array_merge([
+            'DHL-API-Key' => $this->clientId,
+            'Accept' => 'application/json',
+        ], $headers);
     }
 }

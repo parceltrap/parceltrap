@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace OwenVoke\ParcelTrap\Drivers;
 
 use DateTimeImmutable;
-use GuzzleHttp\Client;
+use GrahamCampbell\GuzzleFactory\GuzzleFactory;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\RequestOptions;
 use OwenVoke\ParcelTrap\Contracts\Driver;
 use OwenVoke\ParcelTrap\DTOs\TrackingDetails;
@@ -13,24 +14,18 @@ use OwenVoke\ParcelTrap\Enums\Status;
 
 class RoyalMail implements Driver
 {
-    private Client $client;
+    public const BASE_URI = 'https://api.royalmail.net';
+    private ClientInterface $client;
 
-    public function __construct(string $clientId, string $clientSecret, bool $acceptTerms = true)
+    public function __construct(private string $clientId, private string $clientSecret, private bool $acceptTerms = true, ?ClientInterface $client = null)
     {
-        $this->client = new Client([
-            'base_uri' => 'https://api.royalmail.net',
-            RequestOptions::HEADERS => [
-                'X-Accept-RMG-Terms' => $acceptTerms ? 'yes' : 'no',
-                'X-IBM-Client-Id' => $clientId,
-                'X-IBM-Client-Secret' => $clientSecret,
-                'Accept' => 'application/json',
-            ],
-        ]);
+        $this->client = $client ?? GuzzleFactory::make(['base_uri' => self::BASE_URI]);
     }
 
     public function findTrackingDetails(string $identifier, array $parameters = []): TrackingDetails
     {
-        $request = $this->client->get("/mailpieces/v2/{$identifier}/events", [
+        $request = $this->client->request('GET', "/mailpieces/v2/{$identifier}/events", [
+            RequestOptions::HEADERS => $this->getHeaders(),
             RequestOptions::QUERY => $parameters,
         ]);
 
@@ -58,10 +53,24 @@ class RoyalMail implements Driver
 
     private function mapStatus(string $status): Status
     {
-        return match($status) {
+        return match ($status) {
             'IN TRANSIT' => Status::IN_TRANSIT,
             'DELIVERED' => Status::DELIVERED,
             default => Status::UNKNOWN,
         };
+    }
+
+    /**
+     * @param  array<string, mixed>  $headers
+     * @return array<string, mixed>
+     */
+    private function getHeaders(array $headers = []): array
+    {
+        return array_merge([
+            'X-Accept-RMG-Terms' => $this->acceptTerms ? 'yes' : 'no',
+            'X-IBM-Client-Id' => $this->clientId,
+            'X-IBM-Client-Secret' => $this->clientSecret,
+            'Accept' => 'application/json',
+        ], $headers);
     }
 }
