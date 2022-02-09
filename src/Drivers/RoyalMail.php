@@ -54,9 +54,9 @@ class RoyalMail implements Driver
     private function mapStatus(string $status): Status
     {
         return match ($status) {
-            'IN TRANSIT' => Status::IN_TRANSIT,
-            'DELIVERED' => Status::DELIVERED,
-            default => Status::UNKNOWN,
+            'IN TRANSIT' => Status::In_Transit,
+            'DELIVERED' => Status::Delivered,
+            default => Status::Unknown,
         };
     }
 

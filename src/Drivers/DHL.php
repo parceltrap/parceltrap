@@ -58,11 +58,11 @@ class DHL implements Driver
     private function mapStatus(string $status): Status
     {
         return match ($status) {
-            'pre-transit' => Status::PRE_TRANSIT,
-            'transit' => Status::IN_TRANSIT,
-            'delivered' => Status::DELIVERED,
-            'failure' => Status::FAILURE,
-            default => Status::UNKNOWN,
+            'pre-transit' => Status::Pre_Transit,
+            'transit' => Status::In_Transit,
+            'delivered' => Status::Delivered,
+            'failure' => Status::Failure,
+            default => Status::Unknown,
         };
     }
 

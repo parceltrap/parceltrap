@@ -6,9 +6,9 @@ namespace OwenVoke\ParcelTrap\Enums;
 
 enum Status: string
 {
-    case PRE_TRANSIT = 'Pre-Transit';
-    case IN_TRANSIT = 'In Transit';
-    case DELIVERED = 'Delivered';
-    case FAILURE = 'Failure';
-    case UNKNOWN = 'Unknown';
+    case Pre_Transit = 'pre_transit';
+    case In_Transit = 'in_transit';
+    case Delivered = 'delivered';
+    case Failure = 'failure';
+    case Unknown = 'unknown';
 }
