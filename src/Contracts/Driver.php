@@ -1,8 +1,8 @@
 <?php
 
-namespace OwenVoke\ParcelTrap\Contracts;
+namespace ParcelTrap\Contracts;
 
-use OwenVoke\ParcelTrap\DTOs\TrackingDetails;
+use ParcelTrap\DTOs\TrackingDetails;
 
 interface Driver
 {

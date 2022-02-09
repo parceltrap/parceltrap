@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OwenVoke\ParcelTrap\Enums;
+namespace ParcelTrap\Enums;
 
 enum Status: string
 {

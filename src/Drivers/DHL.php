@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace OwenVoke\ParcelTrap\Drivers;
+namespace ParcelTrap\Drivers;
 
 use DateTimeImmutable;
 use GrahamCampbell\GuzzleFactory\GuzzleFactory;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\RequestOptions;
-use OwenVoke\ParcelTrap\Contracts\Driver;
-use OwenVoke\ParcelTrap\DTOs\TrackingDetails;
-use OwenVoke\ParcelTrap\Enums\Status;
+use ParcelTrap\Contracts\Driver;
+use ParcelTrap\DTOs\TrackingDetails;
+use ParcelTrap\Enums\Status;
 
 class DHL implements Driver
 {

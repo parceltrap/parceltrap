@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace OwenVoke\ParcelTrap\DTOs;
+namespace ParcelTrap\DTOs;
 
 use DateTimeImmutable;
-use OwenVoke\ParcelTrap\Enums\Status;
+use ParcelTrap\Enums\Status;
 use Spatie\DataTransferObject\Attributes\Strict;
 use Spatie\DataTransferObject\DataTransferObject;
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace OwenVoke\ParcelTrap;
+namespace ParcelTrap;
 
-use OwenVoke\ParcelTrap\Contracts\Driver;
+use ParcelTrap\Contracts\Driver;
 
 final class ParcelTrap
 {

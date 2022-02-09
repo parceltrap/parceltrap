@@ -14,7 +14,7 @@ A driver-based parcel tracking library for PHP
 Via Composer
 
 ```shell
-composer require owenvoke/parceltrap
+composer require parceltrap/parceltrap
 ```
 
 ## Usage
@@ -58,17 +58,17 @@ You can buy trees [here][link-treeware-gifting].
 
 Read more about Treeware at [treeware.earth][link-treeware].
 
-[ico-version]: https://img.shields.io/packagist/v/owenvoke/parceltrap.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/parceltrap/parceltrap.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-github-actions]: https://img.shields.io/github/workflow/status/owenvoke/parceltrap/Tests.svg?style=flat-square
+[ico-github-actions]: https://img.shields.io/github/workflow/status/parceltrap/parceltrap/Tests.svg?style=flat-square
 [ico-styleci]: https://styleci.io/repos/xxxxxx/shield
-[ico-downloads]: https://img.shields.io/packagist/dt/owenvoke/parceltrap.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/parceltrap/parceltrap.svg?style=flat-square
 [ico-treeware-gifting]: https://img.shields.io/badge/Treeware-%F0%9F%8C%B3-lightgreen?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/owenvoke/parceltrap
-[link-github-actions]: https://github.com/owenvoke/parceltrap/actions
+[link-packagist]: https://packagist.org/packages/parceltrap/parceltrap
+[link-github-actions]: https://github.com/parceltrap/parceltrap/actions
 [link-styleci]: https://styleci.io/repos/xxxxxx
-[link-downloads]: https://packagist.org/packages/owenvoke/parceltrap
+[link-downloads]: https://packagist.org/packages/parceltrap/parceltrap
 [link-treeware]: https://treeware.earth
 [link-treeware-gifting]: https://ecologi.com/owenvoke?gift-trees
 [link-author]: https://github.com/owenvoke
