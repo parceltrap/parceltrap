@@ -21,6 +21,12 @@ final class ParcelTrap
         }
     }
 
+    /** @param array<string, Driver> $drivers */
+    public static function make(array $drivers = null): ParcelTrap
+    {
+        return new self($drivers);
+    }
+
     public function driver(string $name = null): Driver
     {
         if ($name === null) {
