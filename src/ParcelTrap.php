@@ -22,7 +22,7 @@ final class ParcelTrap
     }
 
     /** @param array<string, Driver> $drivers */
-    public static function make(array $drivers = null): ParcelTrap
+    public static function make(array $drivers = []): self
     {
         return new self($drivers);
     }
