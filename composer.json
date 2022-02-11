@@ -5,7 +5,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "graham-campbell/guzzle-factory": "^5.0",
         "guzzlehttp/guzzle": "^7.4",
         "spatie/data-transfer-object": "^3.7"
     },
