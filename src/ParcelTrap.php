@@ -65,8 +65,8 @@ final class ParcelTrap
         $this->default = $name;
     }
 
-    public function __call(string $name, array $arguments)
+    public function __call(string $name, array $arguments): mixed
     {
-        $this->driver()->{$name}(...$arguments);
+        return $this->driver()->{$name}(...$arguments);
     }
 }
