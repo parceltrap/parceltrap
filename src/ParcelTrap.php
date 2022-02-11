@@ -34,6 +34,10 @@ final class ParcelTrap
             $name = $this->getDefaultDriver();
         }
 
+        if (! isset($this->drivers[$name])) {
+            throw new InvalidArgumentException('The specified driver could not be found');
+        }
+
         return $this->drivers[$name];
     }
 
