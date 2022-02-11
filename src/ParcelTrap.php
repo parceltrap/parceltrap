@@ -7,7 +7,7 @@ namespace ParcelTrap;
 use InvalidArgumentException;
 use ParcelTrap\Contracts\Driver;
 
-final class ParcelTrap
+class ParcelTrap
 {
     /** @var array<string, Driver> */
     private array $drivers;
