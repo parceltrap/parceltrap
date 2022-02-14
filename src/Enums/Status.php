@@ -16,7 +16,7 @@ enum Status: string
 
     public function description(): string
     {
-        return match($this) {
+        return match ($this) {
             self::Pending => 'Pending',
             self::Pre_Transit => 'Pre-Transit',
             self::In_Transit => 'In Transit',
