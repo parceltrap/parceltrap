@@ -50,7 +50,9 @@ it('can call `find` on a ParcelTrap driver', function () {
         ->toBeInstanceOf(TrackingDetails::class)
         ->identifier->toBe('abcdefg')
         ->status->toBe(Status::Unknown)
-        ->status->description()->toBe('Unknown');
+        ->status->description()->toBe('Unknown')
+        ->summary->toBe('This is a summary for the null driver')
+        ->estimatedDelivery->toEqual(new DateTimeImmutable('2022-01-01'));
 });
 
 it('can call `find` on the default ParcelTrap driver', function () {
