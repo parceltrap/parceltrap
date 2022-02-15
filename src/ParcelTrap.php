@@ -7,6 +7,7 @@ namespace ParcelTrap;
 use InvalidArgumentException;
 use ParcelTrap\Contracts\Driver;
 
+/** @mixin Driver */
 class ParcelTrap
 {
     /** @var array<string, Driver> */
