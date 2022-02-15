@@ -19,7 +19,33 @@ composer require parceltrap/parceltrap
 
 ## Usage
 
-...
+```php
+use ParcelTrap\ParcelTrap;
+
+// Instantiate a new ParcelTrap instance
+$parcelTrap = new ParcelTrap([]); // or ParcelTrap::make([]);
+
+// Add additional drivers
+$parcelTrap->addDriver('name', MyDriver::make());
+
+// Set the default driver
+$parcelTrap->setDefaultDriver('name');
+
+// Get the default driver
+$parcelTrap->getDefaultDriver();
+
+// Check whether a driver exists
+$parcelTrap->hasDriver('name');
+
+// Retrieve a specific driver
+$parcelTrap->driver('name');
+
+// Call `find()` on a driver
+$parcelTrap->driver('name')->find('abcdefg');
+
+// Call `find()` on the default driver
+$parcelTrap->find('abcdefg');
+```
 
 ## Change log
 
