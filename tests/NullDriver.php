@@ -2,6 +2,7 @@
 
 namespace ParcelTrap\Tests;
 
+use DateTimeImmutable;
 use GuzzleHttp\ClientInterface;
 use ParcelTrap\Contracts\Driver;
 use ParcelTrap\DTOs\TrackingDetails;
@@ -18,8 +19,8 @@ class NullDriver implements Driver
     {
         return new TrackingDetails(
             identifier: $identifier,
-            summary: '',
-            estimatedDelivery: new \DateTimeImmutable(),
+            summary: 'This is a summary for the null driver',
+            estimatedDelivery: new DateTimeImmutable('2022-01-01'),
             status: Status::Unknown,
             events: [],
             raw: [],
