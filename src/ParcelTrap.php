@@ -7,15 +7,21 @@ namespace ParcelTrap;
 use InvalidArgumentException;
 use ParcelTrap\Contracts\Driver;
 
-/** @mixin Driver */
+/**
+ * @template TKey of string
+ * @template TValue of Driver
+ *
+ * @mixin Driver
+ */
 class ParcelTrap
 {
-    /** @var array<string, Driver> */
+    /** @var array<TKey, TValue> */
     private array $drivers;
 
+    /** @var TKey|null */
     private ?string $default = null;
 
-    /** @param array<string, Driver> $drivers */
+    /** @param array<TKey, TValue> $drivers */
     public function __construct(array $drivers)
     {
         foreach ($drivers as $name => $driver) {
@@ -23,12 +29,19 @@ class ParcelTrap
         }
     }
 
-    /** @param array<string, Driver> $drivers */
+    /**
+     * @param  array<TKey, TValue>  $drivers
+     * @return self<TKey, TValue>
+     */
     public static function make(array $drivers = []): self
     {
         return new self($drivers);
     }
 
+    /**
+     * @param  TKey|null  $name
+     * @return TValue
+     */
     public function driver(string $name = null): Driver
     {
         if ($name === null) {
@@ -42,11 +55,16 @@ class ParcelTrap
         return $this->drivers[$name];
     }
 
+    /**
+     * @param  TKey  $name
+     * @param  TValue  $driver
+     */
     public function addDriver(string $name, Driver $driver): void
     {
         $this->drivers[$name] = $driver;
     }
 
+    /** @param TKey $name */
     public function hasDriver(string $name): bool
     {
         return isset($this->drivers[$name]);
@@ -61,6 +79,7 @@ class ParcelTrap
         return $this->default;
     }
 
+    /** @param TKey $name */
     public function setDefaultDriver(string $name): void
     {
         if (! isset($this->drivers[$name])) {
