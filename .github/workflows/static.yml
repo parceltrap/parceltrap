@@ -42,11 +42,11 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: 8.1
-        tools: composer
+        tools: composer, infection
         coverage: pcov
 
     - name: Install Dependencies
       run: composer update --no-interaction --prefer-dist --no-progress --ansi
 
     - name: Run Infection
-      run: vendor/bin/infection --no-progress --ansi --min-msi=100 --min-covered-msi=100 --threads=4
+      run: infection --no-progress --ansi --min-msi=100 --min-covered-msi=100 --threads=4

@@ -9,7 +9,6 @@
         "spatie/data-transfer-object": "^3.7"
     },
     "require-dev": {
-        "infection/infection": "^0.26.5",
         "pestphp/pest": "^1.21.1",
         "phpstan/phpstan": "^1.4.6",
         "symfony/var-dumper": "^6.0"
