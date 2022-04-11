@@ -8,8 +8,8 @@ use Illuminate\Container\Container;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Manager;
 use InvalidArgumentException;
-use ParcelTrap\Contracts\Factory;
 use ParcelTrap\Contracts\Driver;
+use ParcelTrap\Contracts\Factory;
 use ParcelTrap\Drivers\NullDriver;
 
 class ParcelTrap extends Manager implements Factory
@@ -26,7 +26,7 @@ class ParcelTrap extends Manager implements Factory
 
         return new self(tap($container, function (Container $container) use ($drivers) {
             foreach ($drivers as $name => $driver) {
-                $container->bind($name, fn() => $driver);
+                $container->bind($name, fn () => $driver);
             }
         }));
     }

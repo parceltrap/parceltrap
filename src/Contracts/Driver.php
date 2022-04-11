@@ -2,7 +2,6 @@
 
 namespace ParcelTrap\Contracts;
 
-use GuzzleHttp\ClientInterface;
 use ParcelTrap\DTOs\TrackingDetails;
 
 interface Driver
