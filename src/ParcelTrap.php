@@ -4,52 +4,36 @@ declare(strict_types=1);
 
 namespace ParcelTrap;
 
+use Illuminate\Container\Container;
+use Illuminate\Contracts\Config\Repository;
+use Illuminate\Support\Manager;
 use InvalidArgumentException;
+use ParcelTrap\Contracts\Factory;
 use ParcelTrap\Contracts\Driver;
+use ParcelTrap\Drivers\NullDriver;
 
-/** @mixin Driver */
-class ParcelTrap
+class ParcelTrap extends Manager implements Factory
 {
-    /** @var array<string, Driver> */
-    private array $drivers;
-
     private ?string $default = null;
 
-    /** @param array<string, Driver> $drivers */
-    public function __construct(array $drivers)
+    /** @param  array<string, Driver>  $drivers */
+    public static function make(array $drivers = null): self
     {
-        foreach ($drivers as $name => $driver) {
-            $this->addDriver($name, $driver);
-        }
+        $container = new Container();
+
+        $container->bind(Repository::class, \Illuminate\Config\Repository::class);
+        $container->alias(Repository::class, 'config');
+
+        return new self(tap($container, function (Container $container) use ($drivers) {
+            foreach ($drivers as $name => $driver) {
+                $container->bind($name, fn() => $driver);
+            }
+        }));
     }
 
-    /** @param array<string, Driver> $drivers */
-    public static function make(array $drivers = []): self
+    public function createNullDriver(): NullDriver
     {
-        return new self($drivers);
-    }
-
-    public function driver(string $name = null): Driver
-    {
-        if ($name === null) {
-            $name = $this->getDefaultDriver();
-        }
-
-        if (! isset($this->drivers[$name])) {
-            throw new InvalidArgumentException('The specified driver could not be found');
-        }
-
-        return $this->drivers[$name];
-    }
-
-    public function addDriver(string $name, Driver $driver): void
-    {
-        $this->drivers[$name] = $driver;
-    }
-
-    public function hasDriver(string $name): bool
-    {
-        return isset($this->drivers[$name]);
+        return new NullDriver();
     }
 
     public function getDefaultDriver(): string
@@ -63,15 +47,6 @@ class ParcelTrap
 
     public function setDefaultDriver(string $name): void
     {
-        if (! isset($this->drivers[$name])) {
-            throw new InvalidArgumentException('The specified default driver could not be found in the list of drivers');
-        }
-
         $this->default = $name;
-    }
-
-    public function __call(string $name, array $arguments): mixed
-    {
-        return $this->driver()->{$name}(...$arguments);
     }
 }

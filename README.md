@@ -23,19 +23,18 @@ composer require parceltrap/parceltrap
 use ParcelTrap\ParcelTrap;
 
 // Instantiate a new ParcelTrap instance
-$parcelTrap = new ParcelTrap([]); // or ParcelTrap::make([]);
+$parcelTrap = new ParcelTrap($container); // or ParcelTrap::make([]);
 
 // Add additional drivers
-$parcelTrap->addDriver('name', MyDriver::make());
+$parcelTrap->extend('my_driver', function () {
+    return new MyDriver();
+});
 
 // Set the default driver
 $parcelTrap->setDefaultDriver('name');
 
 // Get the default driver
 $parcelTrap->getDefaultDriver();
-
-// Check whether a driver exists
-$parcelTrap->hasDriver('name');
 
 // Retrieve a specific driver
 $parcelTrap->driver('name');
