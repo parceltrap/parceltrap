@@ -13,11 +13,16 @@ use Spatie\DataTransferObject\DataTransferObject;
 class TrackingDetails extends DataTransferObject
 {
     public string $identifier;
+
     public ?string $summary;
+
     public ?DateTimeImmutable $estimatedDelivery;
+
     public Status $status;
+
     /** @var array<int, array> */
     public array $events;
+
     /** @var array<string, mixed> */
     public array $raw;
 }
