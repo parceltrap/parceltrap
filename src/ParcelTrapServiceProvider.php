@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ParcelTrap;
 
-use Illuminate\Container\Container;
+use Illuminate\Contracts\Container\Container;
 use ParcelTrap\Contracts\Driver;
 use ParcelTrap\Contracts\Factory;
 use Spatie\LaravelPackageTools\Package;
