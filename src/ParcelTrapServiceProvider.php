@@ -21,7 +21,8 @@ class ParcelTrapServiceProvider extends PackageServiceProvider
 
     public function packageRegistered(): void
     {
-        $this->app->bind(Factory::class, ParcelTrap::class);
+        $this->app->singleton(ParcelTrap::class);
+        $this->app->alias(ParcelTrap::class, Factory::class);
 
         $this->app->bind(Driver::class, function (Container $app) {
             return $app->make(Factory::class)->driver(); // @phpstan-ignore-line
