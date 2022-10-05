@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
+use Illuminate\Contracts\Config\Repository;
 use ParcelTrap\Drivers\NullDriver;
 use ParcelTrap\DTOs\TrackingDetails;
 use ParcelTrap\Enums\Status;
 use ParcelTrap\ParcelTrap;
 
 it('can instantiate ParcelTrap', function () {
-    expect(ParcelTrap::make(['null' => new NullDriver()]))
-        ->toBeInstanceOf(ParcelTrap::class);
+    expect($this->app->get(ParcelTrap::class))->toBeInstanceOf(ParcelTrap::class);
 });
 
 it('can add multiple drivers to ParcelTrap', function () {
-    $client = ParcelTrap::make(['null' => new NullDriver()]);
+    $client = $this->app->get(ParcelTrap::class);
     $client->extend('null2', function () {
         return new NullDriver();
     });
@@ -22,28 +22,31 @@ it('can add multiple drivers to ParcelTrap', function () {
 });
 
 it('can retrieve a driver from ParcelTrap', function () {
-    expect(ParcelTrap::make(['null' => new NullDriver()]))
+    expect($this->app->get(ParcelTrap::class))
         ->driver('null')->toBeInstanceOf(NullDriver::class);
 });
 
 it('throws an exception when a driver can\'t be found in ParcelTrap', function () {
-    ParcelTrap::make([])->driver('abc');
+    $this->app->get(ParcelTrap::class)->driver('abc');
 })->throws(InvalidArgumentException::class);
 
 it('can set a default ParcelTrap driver', function () {
-    $client = ParcelTrap::make(['null' => new NullDriver()]);
-    $client->setDefaultDriver('null');
+    config()->set('parceltrap.default', 'null');
 
-    expect($client->getDefaultDriver())->toBe('null');
-    expect($client->driver())->toBeInstanceOf(NullDriver::class);
+    $client = $this->app->get(ParcelTrap::class);
+
+    expect($client->getDefaultDriver())->toBe('null')
+        ->and($client->driver())->toBeInstanceOf(NullDriver::class);
 });
 
 it('throws an exception when a default driver hasn\'t been set in ParcelTrap', function () {
-    ParcelTrap::make([])->driver();
-})->throws(InvalidArgumentException::class);
+    $this->app->get(Repository::class)->set('parceltrap.default', null);
+
+    $this->app->get(ParcelTrap::class)->driver();
+})->throws(InvalidArgumentException::class, 'A default ParcelTrap driver has not been configured');
 
 it('can call `find` on a ParcelTrap driver', function () {
-    expect(ParcelTrap::make(['null' => new NullDriver()])->driver('null')->find('abcdefg'))
+    expect($this->app->get(ParcelTrap::class)->driver('null')->find('abcdefg'))
         ->toBeInstanceOf(TrackingDetails::class)
         ->identifier->toBe('abcdefg')
         ->status->toBe(Status::Unknown)
@@ -53,8 +56,7 @@ it('can call `find` on a ParcelTrap driver', function () {
 });
 
 it('can call `find` on the default ParcelTrap driver', function () {
-    $client = ParcelTrap::make(['null' => new NullDriver()]);
-    $client->setDefaultDriver('null');
+    $client = $this->app->get(ParcelTrap::class);
 
     expect($client->find('abcdefg'))->toBeInstanceOf(TrackingDetails::class);
 });

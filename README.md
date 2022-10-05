@@ -19,22 +19,18 @@ composer require parceltrap/parceltrap
 
 ## Usage
 
+You will need to configure a default driver, along with your ParcelTrap drivers in the [`config/parceltrap.php` file](./config/parceltrap.php).
+
 ```php
 use ParcelTrap\ParcelTrap;
 
-// Instantiate a new ParcelTrap instance
-$parcelTrap = new ParcelTrap($container); // or ParcelTrap::make([]);
+/** @var ParcelTrap $parcelTrap */
+$parcelTrap = $this->app->make(ParcelTrap::class);
 
 // Add additional drivers
 $parcelTrap->extend('my_driver', function () {
     return new MyDriver();
 });
-
-// Set the default driver
-$parcelTrap->setDefaultDriver('name');
-
-// Get the default driver
-$parcelTrap->getDefaultDriver();
 
 // Retrieve a specific driver
 $parcelTrap->driver('name');
@@ -44,6 +40,18 @@ $parcelTrap->driver('name')->find('abcdefg');
 
 // Call `find()` on the default driver
 $parcelTrap->find('abcdefg');
+```
+
+**Using the Facade**
+
+```php
+use ParcelTrap\Facades\ParcelTrap;
+
+// Using the default driver with the facade
+ParcelTrap::find('ABCDEFG12345');
+
+// Using a specific driver with the facade
+ParcelTrap::driver('royal_mail')->find('ABCDEFG12345');
 ```
 
 ## Change log
