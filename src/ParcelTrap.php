@@ -17,8 +17,13 @@ class ParcelTrap extends Manager implements Factory
 
     public function getDefaultDriver(): string
     {
-        return $this->config->get('parceltrap.default') ?? throw new \InvalidArgumentException(
-            'A default ParcelTrap driver has not been configured'
-        );
+        /** @var string|null $driver */
+        $driver = $this->config->get('parceltrap.default');
+
+        if (! is_string($driver)) {
+            throw new \InvalidArgumentException('A default ParcelTrap driver has not been configured');
+        }
+
+        return $driver;
     }
 }
