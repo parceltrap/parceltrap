@@ -5,7 +5,7 @@ namespace ParcelTrap\Exceptions;
 use ParcelTrap\Contracts\Driver;
 use Throwable;
 
-class ApiLimitReachedException extends ParcelTrapException
+class ApiLimitReachedException extends ParcelTrapDriverException
 {
     public function __construct(
         private readonly int $limit,

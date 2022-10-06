@@ -5,7 +5,7 @@ namespace ParcelTrap\Exceptions;
 use Exception;
 use ParcelTrap\Contracts\Driver;
 
-abstract class ParcelTrapException extends Exception
+abstract class ParcelTrapDriverException extends Exception
 {
     private Driver $driver;
 
