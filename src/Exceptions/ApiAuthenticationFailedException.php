@@ -5,7 +5,7 @@ namespace ParcelTrap\Exceptions;
 use ParcelTrap\Contracts\Driver;
 use Throwable;
 
-class ApiAuthenticationFailedException extends ParcelTrapException
+class ApiAuthenticationFailedException extends ParcelTrapDriverException
 {
     public function __construct(
         Driver $driver,
