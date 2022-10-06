@@ -13,6 +13,7 @@ enum Status: string
     case Failure = 'failure';
     case Not_Found = 'not_found';
     case Unknown = 'unknown';
+    case Cancelled = 'cancelled';
 
     public function description(): string
     {
@@ -24,6 +25,7 @@ enum Status: string
             self::Failure => 'Failure',
             self::Not_Found => 'Not Found',
             self::Unknown => 'Unknown',
+            self::Cancelled => 'Cancelled',
         };
     }
 }
