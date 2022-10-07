@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), and this 
 
 ## Unreleased
 
+## v1.2.0 - 2022-10-07
+
+### Added
+- Add API exceptions for rate limiting and authentication ([#6](https://github.com/parceltrap/parceltrap/pull/6))
+
 ## v1.1.0 - 2022-10-06
 
 ### Added
