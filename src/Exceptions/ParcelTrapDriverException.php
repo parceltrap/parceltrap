@@ -7,26 +7,14 @@ use ParcelTrap\Contracts\Driver;
 
 abstract class ParcelTrapDriverException extends Exception
 {
-    private Driver $driver;
+    public readonly Driver $driver; // @phpstan-ignore-line
 
     public function getDriverName(): string
     {
-        $class = get_class($this->getDriver());
+        $class = get_class($this->driver);
         $class = str_contains($class, '\\') ? substr($class, strrpos($class, '\\') + 1) : $class;
         $class = str_replace(['ParcelTrap', 'Driver'], '', $class);
 
         return $class;
-    }
-
-    public function getDriver(): Driver
-    {
-        return $this->driver;
-    }
-
-    public function setDriver(Driver $driver): self
-    {
-        $this->driver = $driver;
-
-        return $this;
     }
 }

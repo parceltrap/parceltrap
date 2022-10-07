@@ -8,11 +8,9 @@ use Throwable;
 class ApiAuthenticationFailedException extends ParcelTrapDriverException
 {
     public function __construct(
-        Driver $driver,
+        public readonly Driver $driver,
         ?Throwable $previous = null
     ) {
-        $this->setDriver($driver);
-
         parent::__construct(
             message: sprintf(
                 'The API authentication failed for the %s driver',
