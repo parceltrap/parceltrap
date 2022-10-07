@@ -15,7 +15,7 @@ class ApiAuthenticationFailedException extends ParcelTrapDriverException
 
         parent::__construct(
             message: sprintf(
-                'Failed to authenticate connection with %s',
+                'The API authentication failed for the %s driver',
                 $this->getDriverName(),
             ),
             code: 403,
