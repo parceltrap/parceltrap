@@ -11,7 +11,8 @@ abstract class ParcelTrapDriverException extends Exception
 
     public function getDriverName(): string
     {
-        $class = basename(get_class($this->getDriver()));
+        $class = get_class($this->getDriver());
+        $class = str_contains($class, '\\') ? substr($class, strrpos($class, '\\') + 1) : $class;
         $class = str_replace(['ParcelTrap', 'Driver'], '', $class);
 
         return $class;
