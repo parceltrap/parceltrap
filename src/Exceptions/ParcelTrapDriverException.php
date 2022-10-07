@@ -4,17 +4,29 @@ namespace ParcelTrap\Exceptions;
 
 use Exception;
 use ParcelTrap\Contracts\Driver;
+use Throwable;
 
 abstract class ParcelTrapDriverException extends Exception
 {
-    public readonly Driver $driver; // @phpstan-ignore-line
-
-    public function getDriverName(): string
+    public function __construct(public readonly Driver $driver, string $message = "", int $code = 0, ?Throwable $previous = null)
     {
-        $class = get_class($this->driver);
-        $class = str_contains($class, '\\') ? substr($class, strrpos($class, '\\') + 1) : $class;
-        $class = str_replace(['ParcelTrap', 'Driver'], '', $class);
+        parent::__construct(
+            message: $message,
+            code: $code,
+            previous: $previous,
+        );
+    }
 
-        return $class;
+    public function driverName(): string
+    {
+        return self::getDriverName($this->driver);
+    }
+
+    protected static function getDriverName(Driver $driver): string
+    {
+        $class = get_class($driver);
+        $class = str_contains($class, '\\') ? substr($class, strrpos($class, '\\') + 1) : $class;
+
+        return str_replace(['ParcelTrap', 'Driver'], '', $class);
     }
 }
