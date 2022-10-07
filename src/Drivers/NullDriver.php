@@ -21,9 +21,9 @@ class NullDriver implements Driver
 
         if ($identifier === 'MOCK-API-LIMIT-EXCEEDED') {
             throw new ApiLimitReachedException(
+                driver: $this,
                 limit: 10,
                 period: 'minute',
-                driver: $this,
             );
         }
 
