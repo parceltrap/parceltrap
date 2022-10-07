@@ -17,10 +17,10 @@ class ApiLimitReachedException extends ParcelTrapDriverException
 
         parent::__construct(
             message: sprintf(
-                '%s API limit reached (%d calls/%s)',
-                $this->getDriverName(),
+                'The API limit of %s requests per %s has been reached for the %s driver',
                 $limit,
-                $period
+                $period,
+                $this->getDriverName(),
             ),
             code: 429,
             previous: $previous,
