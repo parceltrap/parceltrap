@@ -8,7 +8,7 @@ use Throwable;
 
 abstract class ParcelTrapDriverException extends Exception
 {
-    public function __construct(public readonly Driver $driver, string $message = "", int $code = 0, ?Throwable $previous = null)
+    public function __construct(public readonly Driver $driver, string $message = '', int $code = 0, ?Throwable $previous = null)
     {
         parent::__construct(
             message: $message,
