@@ -8,17 +8,18 @@ use Throwable;
 class ApiLimitReachedException extends ParcelTrapDriverException
 {
     public function __construct(
-        public readonly Driver $driver,
+        Driver $driver,
         public readonly int $limit,
         public readonly string $period,
         ?Throwable $previous = null
     ) {
         parent::__construct(
+            driver: $driver,
             message: sprintf(
                 'The API limit of %s requests per %s has been reached for the %s driver',
                 $limit,
                 $period,
-                $this->getDriverName(),
+                self::getDriverName($driver),
             ),
             code: 429,
             previous: $previous,
