@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), and this 
 
 ## Unreleased
 
+## v1.3.0 - 2022-10-10
+
+### Added
+- Add new `ParcelTrap\Contracts\ParcelTrapException` interface for all exceptions ([#9](https://github.com/parceltrap/parceltrap/pull/9))
+
 ## v1.2.0 - 2022-10-07
 
 ### Added
