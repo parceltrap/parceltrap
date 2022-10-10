@@ -4,9 +4,10 @@ namespace ParcelTrap\Exceptions;
 
 use Exception;
 use ParcelTrap\Contracts\Driver;
+use ParcelTrap\Contracts\ParcelTrapException;
 use Throwable;
 
-abstract class ParcelTrapDriverException extends Exception
+abstract class ParcelTrapDriverException extends Exception implements ParcelTrapException
 {
     public function __construct(public readonly Driver $driver, string $message = '', int $code = 0, ?Throwable $previous = null)
     {
