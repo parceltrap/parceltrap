@@ -6,6 +6,7 @@ use Illuminate\Contracts\Config\Repository;
 use ParcelTrap\Drivers\NullDriver;
 use ParcelTrap\DTOs\TrackingDetails;
 use ParcelTrap\Enums\Status;
+use ParcelTrap\Exceptions\InvalidArgumentException;
 use ParcelTrap\ParcelTrap;
 
 it('can instantiate ParcelTrap', function () {
@@ -28,7 +29,7 @@ it('can retrieve a driver from ParcelTrap', function () {
 
 it('throws an exception when a driver can\'t be found in ParcelTrap', function () {
     $this->app->get(ParcelTrap::class)->driver('abc');
-})->throws(InvalidArgumentException::class);
+})->throws(\InvalidArgumentException::class);
 
 it('can set a default ParcelTrap driver', function () {
     config()->set('parceltrap.default', 'null');
