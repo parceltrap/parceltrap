@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), and this 
 
 ## Unreleased
 
+## v1.3.1 - 2023-04-27
+
+### Changed
+- Update facade auto-completion to be static ([#11](https://github.com/parceltrap/parceltrap/pull/11))
+
 ## v1.3.0 - 2022-10-10
 
 ### Added
