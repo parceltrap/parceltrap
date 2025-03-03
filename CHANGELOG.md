@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), and this 
 
 ## Unreleased
 
+## v1.4.0 - 2025-03-03
+
+### Changed
+- Refactor to use Laravel Data ([#13](https://github.com/parceltrap/parceltrap/pull/13))
+
+### Removed
+- Drop support for PHP 8.1 ([#13](https://github.com/parceltrap/parceltrap/pull/13))
+
 ## v1.3.1 - 2023-04-27
 
 ### Changed
