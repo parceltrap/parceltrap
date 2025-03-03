@@ -2,4 +2,4 @@
 
 ...
 
-- [ ] I have read the **[CONTRIBUTING](https://github.com/parceltrap/parceltrap/blob/main/.github/CONTRIBUTING.md)** document.
+Please check the **[CONTRIBUTING](https://github.com/parceltrap/parceltrap/blob/main/.github/CONTRIBUTING.md)** document for more information.

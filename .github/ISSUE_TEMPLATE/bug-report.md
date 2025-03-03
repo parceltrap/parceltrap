@@ -1,19 +1,53 @@
----
 name: Bug Report
-about: If something isn't working as expected.
+description: If something isn't working as expected.
+labels: [ 'type: bug' ]
 
----
+body:
 
-<!-- Provide a general summary of the issue in the Title above -->
+- type: markdown
+  attributes:
+  value: |
+  Thanks for taking the time to fill out this bug report!
 
-## Description
+- type: textarea
+  id: description
+  attributes:
+  label: What happened?
+  description: Also tell us, what did you expect to happen?
+  validations:
+  required: true
 
-Make it clear if the issue is a bug, an enhancement or just a question.
+- type: input
+  id: library-version
+  attributes:
+  label: Library version
+  description: What version of the library are you using? Please be as specific as possible.
+  validations:
+  required: true
 
-## Your environment
+- type: input
+  id: php-version
+  attributes:
+  label: PHP version
+  description: What version of PHP are you using? Please be as specific as possible.
+  placeholder: 8.2.0
+  validations:
+  required: true
 
-Include as many relevant details about the environment you experienced the bug in and how to reproduce it.
+- type: dropdown
+  id: operating-system
+  attributes:
+  label: What operating systems are you seeing the problem on?
+  multiple: true
+  options:
+  - macOS
+  - Linux
+  - Windows
+  validations:
+  required: true
 
-* Version used (e.g. PHP 7.4, 8.0):
-* Operating system and version (e.g. Ubuntu 21.x, Windows 10):
-* ...
+- type: textarea
+  id: notes
+  attributes:
+  label: Notes
+  description: Use this field to provide any other notes that you feel might be relevant to the issue.
