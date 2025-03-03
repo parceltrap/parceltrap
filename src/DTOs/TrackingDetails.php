@@ -6,23 +6,18 @@ namespace ParcelTrap\DTOs;
 
 use DateTimeImmutable;
 use ParcelTrap\Enums\Status;
-use Spatie\DataTransferObject\Attributes\Strict;
-use Spatie\DataTransferObject\DataTransferObject;
+use Spatie\LaravelData\Data;
 
-#[Strict]
-class TrackingDetails extends DataTransferObject
+class TrackingDetails extends Data
 {
-    public string $identifier;
-
-    public ?string $summary;
-
-    public ?DateTimeImmutable $estimatedDelivery;
-
-    public Status $status;
-
-    /** @var array<int, array> */
-    public array $events;
-
-    /** @var array<string, mixed> */
-    public array $raw;
+    public function __construct(
+        public string $identifier,
+        public string|null $summary,
+        public DateTimeImmutable|null $estimatedDelivery,
+        public Status $status,
+        /** @var list<array> $events */
+        public array $events,
+        /** @var array<string, mixed> $raw */
+        public array $raw,
+    ) {}
 }

@@ -3,5 +3,9 @@ parameters:
   paths:
     - src/
 
-  checkMissingIterableValueType: false
-  reportUnmatchedIgnoredErrors: true
+  ignoreErrors:
+  	-
+  		message: '#^Class ParcelTrap\\Facades\\ParcelTrap has PHPDoc tag @method for method find\(\) parameter \#2 \$parameters with no value type specified in iterable type array\.$#'
+  		identifier: missingType.iterableValue
+  		count: 1
+  		path: src/Facades/ParcelTrap.php

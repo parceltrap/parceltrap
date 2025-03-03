@@ -25,7 +25,7 @@ class ParcelTrapServiceProvider extends PackageServiceProvider
         $this->app->alias(ParcelTrap::class, Factory::class);
 
         $this->app->bind(Driver::class, function (Container $app) {
-            return $app->make(Factory::class)->driver(); // @phpstan-ignore-line
+            return $app->make(Factory::class)->driver();
         });
     }
 }

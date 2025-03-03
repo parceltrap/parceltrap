@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ParcelTrap\Contracts;
 
 use ParcelTrap\DTOs\TrackingDetails;

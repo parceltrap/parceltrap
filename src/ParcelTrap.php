@@ -13,7 +13,7 @@ class ParcelTrap extends Manager implements Factory
 {
     public function createNullDriver(): NullDriver
     {
-        return new NullDriver();
+        return new NullDriver;
     }
 
     public function getDefaultDriver(): string

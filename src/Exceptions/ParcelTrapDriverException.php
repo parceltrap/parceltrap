@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ParcelTrap\Exceptions;
 
 use Exception;
@@ -9,7 +11,7 @@ use Throwable;
 
 abstract class ParcelTrapDriverException extends Exception implements ParcelTrapException
 {
-    public function __construct(public readonly Driver $driver, string $message = '', int $code = 0, ?Throwable $previous = null)
+    public function __construct(public readonly Driver $driver, string $message = '', int $code = 0, Throwable|null $previous = null)
     {
         parent::__construct(
             message: $message,

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ParcelTrap\Exceptions;
 
 use ParcelTrap\Contracts\Driver;
@@ -11,7 +13,7 @@ class ApiLimitReachedException extends ParcelTrapDriverException
         Driver $driver,
         public readonly int $limit,
         public readonly string $period,
-        ?Throwable $previous = null
+        Throwable|null $previous = null
     ) {
         parent::__construct(
             driver: $driver,
@@ -26,7 +28,7 @@ class ApiLimitReachedException extends ParcelTrapDriverException
         );
     }
 
-    public static function create(Driver $driver, int $limit, string $period, ?Throwable $previous = null): self
+    public static function create(Driver $driver, int $limit, string $period, Throwable|null $previous = null): self
     {
         return new self(
             driver: $driver,

@@ -6,6 +6,4 @@ namespace ParcelTrap\Exceptions;
 
 use ParcelTrap\Contracts\ParcelTrapException;
 
-class InvalidArgumentException extends \InvalidArgumentException implements ParcelTrapException
-{
-}
+class InvalidArgumentException extends \InvalidArgumentException implements ParcelTrapException {}

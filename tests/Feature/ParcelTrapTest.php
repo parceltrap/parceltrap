@@ -16,7 +16,7 @@ it('can instantiate ParcelTrap', function () {
 it('can add multiple drivers to ParcelTrap', function () {
     $client = $this->app->get(ParcelTrap::class);
     $client->extend('null2', function () {
-        return new NullDriver();
+        return new NullDriver;
     });
 
     expect($client)->driver('null2')->toBeInstanceOf(NullDriver::class);
