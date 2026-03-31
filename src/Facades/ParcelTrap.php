@@ -10,7 +10,7 @@ use ParcelTrap\DTOs\TrackingDetails;
 
 /**
  * @method static Driver driver(string|null $driver = null)
- * @method static TrackingDetails find(string $identifier, array $parameters = [])
+ * @method static TrackingDetails find(string $identifier, array<string, mixed> $parameters = [])
  */
 class ParcelTrap extends Facade
 {
