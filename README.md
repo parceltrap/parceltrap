@@ -56,7 +56,7 @@ ParcelTrap::driver('royal_mail')->find('ABCDEFG12345');
 
 ## Change log
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+Please see [GitHub Releases](https://github.com/parceltrap/parceltrap/releases) for more information on what has changed recently.
 
 ## Testing
 
